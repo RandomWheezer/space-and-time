@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Space &amp; Time</title>
+  <meta name="description" content="Explore NASA's Astronomy Picture of the Day: a beginner-friendly viewer for middle-school astronomers.">
+  <!-- Tab icon: a telescope emoji drawn as a tiny SVG, so no image file is needed -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔭</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Space &amp; Time</h1>
+      <p class="tagline">One amazing picture of our universe, every day.</p>
+    </div>
+    <button id="text-size-btn" class="text-size" type="button" aria-pressed="false">Click for enlarged text</button>
+  </header>
+
+  <main>
+    <!-- Time-travel controls: move through the days -->
+    <nav class="controls" aria-label="Choose a day">
+      <button id="prev-btn" class="prev" type="button">← Previous day</button>
+      <div class="date-group">
+        <label for="date-picker">Pick a date</label>
+        <input id="date-picker" type="date" min="1995-06-16" required>
+        <button id="go-btn" type="button" aria-label="Go to the picked date">Go</button>
+      </div>
+      <button id="next-btn" class="next" type="button">Next day →</button>
+      <button id="latest-btn" class="latest" type="button">Latest</button>
+      <button id="surprise-btn" class="surprise" type="button">🎲 Surprise me</button>
+    </nav>
+
+    <!-- Screen readers hear short updates from here (e.g. "Showing: Saturn Behind the Moon") -->
+    <p id="announcer" class="visually-hidden" aria-live="polite"></p>
+
+    <!-- app.js fills this area with a loading message, the picture, or an error -->
+    <section id="apod" aria-label="Picture of the day">
+      <p class="status">Loading today's picture…</p>
+    </section>
+
+    <!-- app.js fills this with the pictures you saved -->
+    <section id="favorites" aria-label="My favorites"></section>
+  </main>
+
+  <footer>
+    Pictures and text from
+    <a href="https://apod.nasa.gov/apod/" target="_blank" rel="noopener">NASA's Astronomy Picture of the Day</a>.
+    Many pictures belong to the photographers named in their credit.<br>
+    Space &amp; Time is a student project and is not an official NASA website.
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="glossary.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

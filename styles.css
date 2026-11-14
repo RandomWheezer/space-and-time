@@ -1,0 +1,256 @@
+/* Dark "night sky" theme */
+:root {
+  --bg: #0b1020;
+  --card: #151c33;
+  --text: #e8ecf8;
+  --muted: #9aa5c4;
+  --accent: #ffcf5c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 1.125rem; /* 18px normally; grows with the Bigger text button */
+  line-height: 1.6;
+}
+
+/* "Bigger text" button: makes everything that uses rem 25% larger */
+html.big-text { font-size: 125%; }
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px; /* extra space so it's far from the date controls */
+}
+
+/* Text size button: small and quiet, so it doesn't look like the date buttons */
+.text-size {
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  padding: 4px 6px;
+  text-decoration: underline dotted;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-top: 20px;
+}
+.text-size:hover, .text-size:focus-visible { color: var(--text); }
+
+header, main, footer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+h1 { margin: 16px 0 0; color: var(--accent); font-size: 2.2rem; }
+.tagline { margin: 0; color: var(--muted); }
+
+#apod {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 20px;
+  overflow-wrap: anywhere; /* long credits or links can't stick out on small screens */
+}
+
+/* A clear gold outline shows where you are when using the keyboard (Tab key) */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Hidden on screen, but still read by screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+#apod h2 { margin-top: 0; }
+.date { color: var(--muted); margin-top: -12px; }
+
+.media img,
+.media iframe,
+.media video {
+  width: 100%;
+  border-radius: 8px;
+  border: 0;
+  display: block;
+}
+.media iframe { aspect-ratio: 16 / 9; }
+
+.credit { color: var(--muted); font-size: 0.9rem; }
+.status { color: var(--muted); }
+.notice {
+  border-left: 4px solid var(--accent);
+  padding: 8px 12px;
+  background: #1d2545;
+}
+
+/* Time-travel controls */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.date-group { display: flex; gap: 8px; align-items: center; }
+.controls button,
+.controls input,
+.pill {
+  font: inherit;
+  min-height: 44px; /* big enough to tap with a finger */
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #2c3866;
+  background: var(--card);
+  color: var(--text);
+  color-scheme: dark; /* makes the calendar popup dark too */
+}
+.controls button, .pill { cursor: pointer; }
+.pill:hover { border-color: var(--accent); }
+.controls input:invalid { border-color: #ff6b6b; } /* red border = date out of range */
+.controls button:hover:not(:disabled) { border-color: var(--accent); }
+.controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Word helper: highlighted glossary words and their meaning box */
+.hint { color: var(--muted); font-size: 0.9rem; margin-bottom: 0; }
+.term {
+  font: inherit;
+  color: var(--accent);
+  background: none;
+  border: 0;
+  border-bottom: 2px dotted var(--accent);
+  padding: 0;
+  cursor: pointer;
+}
+.term:hover, .term:focus-visible { background: #2a3360; }
+.word-help {
+  position: relative;
+  background: #1d2545;
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 10px 44px 10px 14px;
+  margin: 0 0 16px;
+}
+.word-help .close {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 1.4rem;
+  line-height: 1;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 4px 10px;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  cursor: pointer;
+}
+.word-help .close:hover { color: var(--text); }
+
+/* Favorites */
+.fav-row { margin: -4px 0 16px; }
+#favorites { margin-top: 28px; }
+#favorites h2 { font-size: 1.3rem; margin-bottom: 8px; }
+.fav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.fav-list li {
+  display: flex;
+  background: var(--card);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.fav-open {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  text-align: left;
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  color: var(--text);
+  background: none;
+  border: 0;
+  padding: 8px;
+  cursor: pointer;
+}
+.fav-open:hover, .fav-open:focus-visible { background: #1d2545; }
+.fav-open img, .fav-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+.fav-thumb { display: grid; place-items: center; background: #1d2545; font-size: 1.6rem; }
+.fav-open small { color: var(--muted); }
+.fav-remove {
+  font-size: 1.4rem;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  min-width: 48px;
+  padding: 0 14px;
+  cursor: pointer;
+}
+.fav-remove:hover, .fav-remove:focus-visible { color: #ff6b6b; }
+
+a { color: var(--accent); }
+footer { color: var(--muted); font-size: 0.9rem; }
+
+/* ---------- Phones and narrow windows ---------- */
+@media (max-width: 640px) {
+  header, main, footer { padding: 12px 16px; }
+  h1 { font-size: 1.8rem; }
+  #apod { padding: 14px; }
+
+  /* Tidy grid instead of a messy wrap:
+       [ Pick a date ......... Go ]
+       [ ← Previous ] [ Next →    ]
+       [ Latest     ] [ Surprise  ] */
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "date date"
+      "prev next"
+      "latest surprise";
+  }
+  .controls > * { min-width: 0; } /* never wider than the screen */
+  .controls button { padding: 8px 10px; white-space: nowrap; }
+  .text-size { margin-top: 0; }
+  .date-group { grid-area: date; }
+  .date-group input { flex: 1; min-width: 0; }
+  .prev { grid-area: prev; }
+  .next { grid-area: next; }
+  .latest { grid-area: latest; }
+  .surprise { grid-area: surprise; }
+}
+
+/* People who turn off animations in their computer settings get none here either */
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; }
+}
